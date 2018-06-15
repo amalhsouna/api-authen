@@ -15,7 +15,8 @@
 /vendor/
 /web/bundles/
 .idea/
-
+docker-compose.yml
+.env
 tests/_output/*
 src/AppBundle/tests/_output/*
 src/AppBundle/tests/_support/_generated/
