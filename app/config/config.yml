@@ -81,7 +81,10 @@ fos_rest:
         default_format: json
     view:
         view_response_listener: true
-
+    format_listener:
+        rules:
+            - { path: ^/v1, priorities: [json], fallback_format: false, prefer_extension: true }
+            - { path: ^/, priorities: [json, text/html], fallback_format: false, prefer_extension: true }
 nelmio_cors:
     paths:
         '^/api/':
@@ -89,3 +92,9 @@ nelmio_cors:
             allow_headers: ['origin', 'content-type', 'authorization']
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
             max_age: 3600
+
+lexik_jwt_authentication:
+    private_key_path: '%jwt_private_key_path%'
+    public_key_path: '%jwt_public_key_path%'
+    pass_phrase: '%jwt_key_pass_phrase%'
+    token_ttl: '%jwt_token_ttl%'

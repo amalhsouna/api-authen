@@ -1,0 +1,29 @@
+version: '3.2'
+services:
+    database:
+        tmpfs: /var/lib/mysql
+        ports:
+          - 3306:3306
+    elasticsearch:
+        environment:
+            DOMAIN_NAME: elasticsearch.starter.docker
+            VIRTUAL_HOST: elasticsearch.starter.docker
+            VIRTUAL_PORT: 9200
+        labels:
+          - "traefik.port=80"
+          - "traefik.backend=elasticshearch"
+          - "traefik.frontend.rule=Host:elasticsearch.docker"
+    traefik:
+      image: traefik:1.5
+      command: --web --docker --logLevel=DEBUG
+      ports:
+        - "80:80"
+        - "8080:8080"
+      volumes:
+        - "/var/run/docker.sock:/var/run/docker.sock"
+        - "$PWD/traefik.toml:/traefik.toml"
+
+networks:
+  wynd:
+    external:
+      name: traefik

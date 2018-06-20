@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: amal
- * Date: 14/06/18
- * Time: 15:04
- */
-
 namespace Wynd\AppBundle\DependencyInjection\Compiler;
 
 
