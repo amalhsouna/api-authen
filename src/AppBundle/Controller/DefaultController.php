@@ -73,7 +73,7 @@ class DefaultController extends FOSRestController
      * Get products
      *
      * @Rest\Get()
-     * @Rest\View(statusCode=Response::HTTP_CREATED)
+     * @Rest\View(statusCode=Response::HTTP_OK)
      * @Route("/api/product", name="get_products")
      * @return Product|\FOS\RestBundle\View\View
      *
@@ -85,6 +85,20 @@ class DefaultController extends FOSRestController
             ->findAll();
         /* @var $products Product[] */
         return $products;
+    }
+
+    /**
+     * Get products by Id | use finder elastic
+     *
+     * @Rest\Get()
+     * @Rest\View(statusCode=Response::HTTP_CREATED)
+     * @Route("/api/product_id", name="get_products_id")
+     * @return Product|\FOS\RestBundle\View\View
+     *
+     */
+    public function findProductById()
+    {
+        return $this->get('fos_elastica.finder.app.product')->find('1');
     }
 }
 

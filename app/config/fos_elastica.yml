@@ -1,0 +1,18 @@
+#fos_elastica
+fos_elastica:
+    clients:
+        default: { host: elasticsearch, port: 9200 }
+    indexes:
+        app: #is similar to the database name in MySQL
+            types: #is similar to table name in MySQL
+                product:
+                    properties: # This contains the list of all documents
+                      id:
+                          type: integer
+                      label: ~
+                    persistence:
+                       driver: orm
+                       model: AppBundle\Entity\Product
+                       provider: ~
+                       listener: ~
+                       finder: ~
