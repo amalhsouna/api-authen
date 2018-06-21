@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class DefaultController extends FOSRestController
 {
@@ -99,6 +100,23 @@ class DefaultController extends FOSRestController
     public function findProductById()
     {
         return $this->get('fos_elastica.finder.app.product')->find('1');
+    }
+
+
+    /**
+     * Get product by id | use paramConverter( convert request parameters to objects.)
+     *
+     * @Rest\Get()
+     * @Rest\View(statusCode=Response::HTTP_OK)
+     * @Route("/api/product/{id}", name="get_products")
+     * @return Product|\FOS\RestBundle\View\View
+     *
+     * @ParamConverter("product", class="AppBundle\Entity\Product")
+     *
+     */
+    public function getProductsAction(Product $product)
+    {
+        return $product;
     }
 }
 
