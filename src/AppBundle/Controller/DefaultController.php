@@ -44,9 +44,7 @@ class DefaultController extends FOSRestController
      * @param Request $request
      *
      * @Rest\View(statusCode=Response::HTTP_CREATED)
-     * @Rest\Post()
-     *
-     * @Route("/api/products", name="homepage")
+     * @Rest\Post("/api/products")
      *
      * @return Product|\FOS\RestBundle\View\View
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -73,9 +71,9 @@ class DefaultController extends FOSRestController
     /**
      * Get products
      *
-     * @Rest\Get()
-     * @Rest\View(statusCode=Response::HTTP_OK)
-     * @Route("/api/product", name="get_products")
+     * @Rest\Get("/api/products")
+     * @Rest\View()
+     *
      * @return Product|\FOS\RestBundle\View\View
      *
      */
@@ -89,11 +87,11 @@ class DefaultController extends FOSRestController
     }
 
     /**
-     * Get products by Id | use finder elastic
+     * Get product by Id | use finder elastic
      *
-     * @Rest\Get()
+     * @Rest\Get("/api/product_id")
      * @Rest\View(statusCode=Response::HTTP_CREATED)
-     * @Route("/api/product_id", name="get_products_id")
+     *
      * @return Product|\FOS\RestBundle\View\View
      *
      */
